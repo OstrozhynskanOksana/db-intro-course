@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 env:
-  FIXTURE_RELEASE: exercises-fixture-v1
+  FIXTURE_RELEASE: exercises-fixture-v2
 
 jobs:
   test:
@@ -41,6 +41,17 @@ jobs:
           else
             curl -L --fail -o ${{ matrix.snapshot }}.dump https://github.com/ZheniaTrochun/db-intro-course/releases/download/${{ env.FIXTURE_RELEASE }}/${{ matrix.snapshot }}.dump
           fi
+
+      - name: Get golden snapshots (${{ matrix.snapshot }})
+        working-directory: exercises/tests/golden_snapshots
+        run: |
+          if [ "${{ matrix.snapshot }}" == "base" ]; then
+            exit 0
+          else
+            curl -L --fail -o ${{ matrix.snapshot }}.zip https://github.com/ZheniaTrochun/db-intro-course/releases/download/${{ env.FIXTURE_RELEASE }}/${{ matrix.snapshot }}.zip
+            unzip ${{ matrix.snapshot }}.zip
+          fi
+          test -d ${{ matrix.snapshot }}
 
       - name: Run tests (${{ matrix.snapshot }})
         working-directory: exercises/tests
