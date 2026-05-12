@@ -32,5 +32,5 @@ join person pp on p.person_id = pp.person_id
 join course_teacher ct on p.professor_id = ct.professor_id 
 join course c on ct.course_id = c.course_id 
 where c.status = 'активний'
-order by course_name asc, activity_type desc, full_name asc
+order by course_name asc, activity_type asc, full_name desc
 
