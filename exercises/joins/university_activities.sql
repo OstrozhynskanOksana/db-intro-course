@@ -35,4 +35,4 @@ from (
     join course c on ct.course_id = c.course_id 
     where c.status = 'активний'
 ) as activities
-order by course_name asc, activity_type asc, full_name collate "C" asc;
+order by course_name asc, activity_type asc, full_name collate "uk-UA-x-icu" asc;
