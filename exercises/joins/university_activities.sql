@@ -21,7 +21,7 @@
  join course c on e.course_id = c.course_id
  where c.status = 'активний'
       
- union 
+ union all
 
  select
      pp.first_name || ' ' || pp.last_name as full_name,
